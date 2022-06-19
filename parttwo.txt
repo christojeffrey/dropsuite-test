@@ -32,7 +32,7 @@ FIRST QUESTION
 
 
 
-FIRST QUESTION
+SECOND QUESTION
 
 select users.id as User, books.name as Book, books.date as Date
 from users, books
