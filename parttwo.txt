@@ -1,0 +1,40 @@
+FIRST QUESTION
+
+(select mark || '' as mark, count(id) as markCount
+    from Users
+    group by mark
+    order by mark)
+  union all
+  (with specificMark as(
+    select mark, count(id) as markCount
+    from Users
+    group by mark
+    order by mark
+  )
+  select 
+  l.mark || '+' || r.mark as mark, l.markCount + r.markCount as markCount
+  from
+    specificMark l, specificMark r
+  where l.mark < r.mark)
+  union all
+  (with specificMark as(
+    select mark, count(id) as markCount
+    from Users
+    group by mark
+    order by mark
+  )
+  select 
+  l.mark || '+' || m.mark || '+' || r.mark as mark, l.markCount + m.markCount + r.markCount as markCount
+  from
+    specificMark l, specificMark m, specificMark r
+  where l.mark < m.mark and m.mark < r.mark);
+
+
+
+
+FIRST QUESTION
+
+select users.id as User, books.name as Book, books.date as Date
+from users, books
+where (users.id, books.date) in (select user_id, max(date) from books group by user_id);
+
